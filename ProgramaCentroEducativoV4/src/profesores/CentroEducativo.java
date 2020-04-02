@@ -7,6 +7,11 @@ import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.Scanner;
 import java.util.TreeMap;
+/**
+ * 
+ * @author MikelPort
+ * @version 4
+ */
 
 public class CentroEducativo { //VERSION 4 DE APLICACIÓN
 	private static String curso;
@@ -93,7 +98,6 @@ public class CentroEducativo { //VERSION 4 DE APLICACIÓN
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-
 		System.out.println();
 		boolean correcto = false;
 
@@ -728,10 +732,12 @@ public class CentroEducativo { //VERSION 4 DE APLICACIÓN
 						break;
 					}
 				} while (!salirProfesor || option != 0);
+				
+				break;
 
 			case 3:
 
-				System.out.println("\n LISTADO DE NOMBRES DE PROFESORES Y ALUMNOS");
+
 				System.out.println("Curso Académico: " + getCurso());
 				System.out.println("LISTADO DE PROFESORES Y ALUMNOS");
 				System.out.println("APELLIDOS/NOMBRE");

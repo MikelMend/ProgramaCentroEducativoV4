@@ -15,12 +15,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class FuncionesFicheros {
-
+	
 	public static void GuardarDatosPersonas(TreeMap<String, Persona> lista) throws IOException {
 		try {
 			FileOutputStream fichero = new FileOutputStream("C:\\ProyectoCentro\\Personas.dat");
 			ObjectOutputStream grabarDatos = new ObjectOutputStream(fichero);
-			grabarDatos.writeObject(lista);
+			Iterator it= lista.keySet().iterator();
+			while (it.hasNext()) {
+				String key= (String) it.next();
+				grabarDatos.writeObject(lista.get(key));
+			}
 
 			if (fichero != null)
 				fichero.close();
@@ -35,19 +39,26 @@ public class FuncionesFicheros {
 		}
 
 	}
-
+	
 	public static TreeMap<String, Persona> obtenerTreeMapDeArchivo(File fichero) throws Exception {
 
 		TreeMap<String, Persona> lista = new TreeMap<String, Persona>();
+		
 
 		try {
-
 			if (!fichero.exists())
 				throw new Exception("El fichero no existe.");
 			FileInputStream entrada = new FileInputStream(fichero);
 			ObjectInputStream lecturaDatos = new ObjectInputStream(entrada);
-			lista = (TreeMap<String, Persona>) lecturaDatos.readObject();
-
+			Persona perso=(Persona)lecturaDatos.readObject();
+			String key= perso.getApellidos()+", "+perso.getNombre();
+			while(lecturaDatos !=null) {
+				lista.put(key, perso);
+				perso=(Persona) lecturaDatos.readObject();
+				key= perso.getApellidos()+", "+perso.getNombre();
+				
+				}
+				lista.put(key, perso);
 			entrada.close();
 			lecturaDatos.close();
 
@@ -59,5 +70,6 @@ public class FuncionesFicheros {
 
 		return lista;
 	}
+
 
 }
